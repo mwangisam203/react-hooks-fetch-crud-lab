@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function QuestionForm(props) {
+function QuestionForm() {
   const [formData, setFormData] = useState({
     prompt: "",
     answer1: "",
@@ -9,6 +9,20 @@ function QuestionForm(props) {
     answer4: "",
     correctIndex: 0,
   });
+  //make  a post request to the backend
+  //send the form data to the backend
+  //update the state in the parent component
+  //clear the form
+  fetch("http://localhost:4000/questions", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(formData),
+  })
+    .then((r) => r.json())
+    .then((newQuestion) => aetQuestions(newQuestion));
+
 
   function handleChange(event) {
     setFormData({
